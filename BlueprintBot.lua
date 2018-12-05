@@ -3,6 +3,7 @@
 
 -- Blueprint here
 
+
 local fuelSlot = 16
 local lowFuelThreshold = 100
 local facingDirection = "East"
@@ -28,6 +29,8 @@ local function ValidatePatterns()
 
 			local x
 			for x = 0, maxX, 1 do
+				print("z: " .. z .. " x: " .. x)
+
 				local inventoryIdx = pattern[z][x]
 
 				if inventoryIdx ~= 0 then
