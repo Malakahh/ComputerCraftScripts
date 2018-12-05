@@ -23,7 +23,7 @@ local function UpdateFile(file)
 		local event, _, handler = os.pullEvent()
 
 		if event == "http_success" then
-			local text = sourceText.readAll()
+			local text = handler.readAll()
 
 			print("File successfully gotten. Writing to file: " .. file)
 
