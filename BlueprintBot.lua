@@ -1,17 +1,7 @@
 -- Note: All coordinates and directions are local to the turtle, and does not reflect cardinal directions
 -- Turtles always move one layer above where they are building
 
--- local blueprint = { -- Blueprint
--- 	[0] = {
--- 		["successive"] = 1,
--- 		["pattern"] = { -- Pattern
--- 			-- 	 x:
--- 			-- z: 
--- 		}
--- 	}
--- }
-
-local blueprint = {}
+-- Blueprint here
 
 local fuelSlot = 16
 local lowFuelThreshold = 100
@@ -282,4 +272,12 @@ local function BuildBlueprint(layers)
 	else
 		print("Pattern validation failed")
 	end
+end
+
+local userInput = io.read()
+
+if type(userInput) == "number" then
+	BuildBlueprint(userInput)
+else
+	print("Input of \"" .. userInput .. "\" is not valid.")
 end
