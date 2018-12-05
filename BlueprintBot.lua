@@ -1,15 +1,18 @@
 -- Note: All coordinates and directions are local to the turtle, and does not reflect cardinal directions
 -- Turtles always move one layer above where they are building
 
-local blueprint = { -- Blueprint
-	[0] = {
-		["successive"] = 1,
-		["pattern"] = { -- Pattern
-			-- 	 x:
-			-- z: 
-		}
-	}
-}
+-- local blueprint = { -- Blueprint
+-- 	[0] = {
+-- 		["successive"] = 1,
+-- 		["pattern"] = { -- Pattern
+-- 			-- 	 x:
+-- 			-- z: 
+-- 		}
+-- 	}
+-- }
+
+local blueprint = {}
+shell.run("Blueprint", blueprint)
 
 local fuelSlot = 16
 local lowFuelThreshold = 100
