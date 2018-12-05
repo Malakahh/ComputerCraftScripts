@@ -134,7 +134,7 @@ local function turnLeft()
 end
 
 local function FaceTowards(direction)
-	while facingDirection ~= direction then
+	while facingDirection ~= direction do
 		turnRight()
 	end
 end
