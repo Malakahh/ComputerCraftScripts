@@ -275,9 +275,5 @@ local function BuildBlueprint(layers)
 end
 
 local userInput = io.read()
+BuildBlueprint(tonumber(userInput))
 
-if type(userInput) == "number" then
-	BuildBlueprint(userInput)
-else
-	print("Input of \"" .. userInput .. "\" is not valid.")
-end
