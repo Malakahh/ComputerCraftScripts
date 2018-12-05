@@ -19,7 +19,7 @@ local function ValidatePatterns()
 	local numPatterns = #blueprint
 
 	local patternIdx
-	for patternIdx = 0, numPatterns, 1 do
+	for patternIdx = 1, numPatterns, 1 do
 		local pattern = blueprint[patternIdx]["pattern"]
 		local maxZ = #pattern
 
@@ -29,8 +29,6 @@ local function ValidatePatterns()
 
 			local x
 			for x = 1, maxX, 1 do
-				print("z: " .. z .. " x: " .. x)
-
 				local inventoryIdx = pattern[z][x]
 
 				if inventoryIdx ~= 0 then
@@ -203,22 +201,24 @@ local function ConstructPattern(pattern)
 
 	local maxZ = #pattern
 	local z
-	for z = 0, maxZ, 1 do
+	for z = 1, maxZ, 1 do
 		local startX, endX, increment
 
-		if z % 2 == 0 then
-			startX = 0
+		if z % 2 == 1 then
+			startX = 1
 			endX = #pattern[z]
 			increment = 1
 
 			FaceTowards("East")
 		else
 			startX = #pattern[z]
-			endX = 0
+			endX = 1
 			increment = -1
 
 			FaceTowards("West")
 		end
+
+		print("startX: " .. startX .. " endX: " .. endX .. " increment: " .. increment)
 
 		local x
 		for x = startX, endX, increment do
@@ -256,7 +256,7 @@ local function BuildBlueprint(layers)
 		local i
 		while true do
 			local patternIdx
-			for patternIdx = 0, #blueprint, 1 do
+			for patternIdx = 1, #blueprint, 1 do
 				local successiveIdx
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
