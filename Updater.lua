@@ -29,10 +29,12 @@ local function UpdateFile(file)
 
 			WriteToFile(file, text)
 			requesting = false;
+			handler.close()
 			return true
 		elseif event == "http_failure" then
 			print("Unable to connect to " .. url)
 			requesting = false;
+			handler.close()
 			return false
 		end
 	end
