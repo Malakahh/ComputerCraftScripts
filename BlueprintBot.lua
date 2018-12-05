@@ -248,6 +248,7 @@ end
 local function BuildBlueprint(layers)
 	if ValidatePatterns() then
 		print("Pattern is valid")
+		print("Building " .. layers .. " layers")
 
 		local i
 		while true do
