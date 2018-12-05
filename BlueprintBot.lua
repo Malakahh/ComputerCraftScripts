@@ -24,11 +24,11 @@ local function ValidatePatterns()
 		local maxZ = #pattern
 
 		local z
-		for z = 0, maxZ, 1 do
+		for z = 1, maxZ, 1 do
 			local maxX = #pattern[z]
 
 			local x
-			for x = 0, maxX, 1 do
+			for x = 1, maxX, 1 do
 				print("z: " .. z .. " x: " .. x)
 
 				local inventoryIdx = pattern[z][x]
