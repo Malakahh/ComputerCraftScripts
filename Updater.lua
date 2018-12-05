@@ -1,5 +1,5 @@
 -- Title:		Updater
--- Version:		1.1
+-- Version:		1.2
 -- Author:		Malakahh
 -- All Rights Reserved
 
