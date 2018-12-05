@@ -188,6 +188,8 @@ local function ValidateInventory()
 		local data = turtle.getItemDetail(i)
 		if data ~= nil then
 			if patternMaterials[i] ~= data.name then
+				print("Found: " .. data.name .. " in slot " .. i .. ". Expected: " .. patternMaterials[i])
+				print("Inventory not valid")
 				return false
 			end
 		end
@@ -222,7 +224,7 @@ local function ConstructPattern(pattern)
 
 		local x
 		for x = startX, endX, increment do
-			
+			print("x: " .. 0)
 			local idxToPlace = pattern[z][x]
 
 			if not ValidateInventory() then
