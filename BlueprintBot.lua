@@ -227,7 +227,7 @@ local function ConstructPattern(pattern)
 
 		local x
 		for x = startX, endX, increment do
-			print("x: " .. x)
+			print("z: " .. z .. " x: " .. x)
 			local idxToPlace = pattern[z][x]
 
 			if not ValidateInventory() then
@@ -237,7 +237,7 @@ local function ConstructPattern(pattern)
 			BuildOne(idxToPlace)
 		end
 
-		if z + 1 ~= maxZ then
+		if z + 1 <= maxZ then
 			FaceTowards("South")
 
 			local idxToPlace = pattern[z + 1][x]
