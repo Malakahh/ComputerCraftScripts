@@ -12,7 +12,6 @@
 -- }
 
 local blueprint = {}
-shell.run("Blueprint", blueprint)
 
 local fuelSlot = 16
 local lowFuelThreshold = 100

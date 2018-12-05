@@ -1,1 +1,1 @@
-local blueprint = ...; blueprint[0] = {1, 1, 1}; blueprint[1] = {0, 1, 0}; blueprint[2] = {1, 1, 1};
+local blueprint = {[0] = {1, 1, 1}, [1] = {0, 1, 0}, [2] = {1, 1, 1}}
