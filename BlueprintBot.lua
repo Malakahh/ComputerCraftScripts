@@ -257,13 +257,20 @@ end
 
 local function BuildBlueprint(layers)
 	if ValidatePatterns() then
+		print("Pattern is valid")
+
 		local i
 		while true do
 			local patternIdx
 			for patternIdx = 0, #blueprint, 1 do
 				local successiveIdx
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
-					ConstructPattern(blueprint[patternIdx]["pattern"])
+					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
+
+					if not success then
+						return
+					end
+
 					i = i + 1
 
 					if i == layers then
@@ -272,5 +279,7 @@ local function BuildBlueprint(layers)
 				end
 			end
 		end
+	else
+		print("Pattern validation failed")
 	end
 end
