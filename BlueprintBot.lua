@@ -54,7 +54,8 @@ end
 local function doRefuel()
 	local currentLevel = turtle.getFuelLevel()
 
-	if currentLevel == lowFuelThreshold then
+	if currentLevel <= lowFuelThreshold then
+		print("Refuelling")
 		turtle.select(fuelSlot)
 		turtle.refuel()
 	end
@@ -178,8 +179,10 @@ local function BuildOne(idxToPlace)
 		turtle.digDown()
 	end
 
-	turtle.select(idxToPlace)
-	turtle.placeDown()
+	if idxToPlace ~= nil and idxToPlace ~= 0 then
+		turtle.select(idxToPlace)
+		turtle.placeDown()
+	end
 end
 
 local function ValidateInventory()
@@ -187,8 +190,8 @@ local function ValidateInventory()
 	for i = 1, 16, 1 do
 		local data = turtle.getItemDetail(i)
 		if data ~= nil then
-			if patternMaterials[i] ~= data.name then
-				print("Found: " .. data.name .. " in slot " .. i .. ". Expected: " .. patternMaterials[i])
+			if patternMaterials[i] ~= nil and patternMaterials[i] ~= data.name then
+				print("Found: " .. tostring(data.name) .. " in slot " .. tostring(i) .. " Expected: " .. tostring(patternMaterials[i]))
 				print("Inventory not valid")
 				return false
 			end
@@ -224,7 +227,7 @@ local function ConstructPattern(pattern)
 
 		local x
 		for x = startX, endX, increment do
-			print("x: " .. 0)
+			print("x: " .. x)
 			local idxToPlace = pattern[z][x]
 
 			if not ValidateInventory() then
@@ -262,6 +265,8 @@ local function BuildBlueprint(layers)
 				local successiveIdx
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
+
+					print("Constructed pattern: " .. success)
 
 					if not success then
 						return
