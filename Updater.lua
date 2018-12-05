@@ -4,8 +4,8 @@
 -- All Rights Reserved
 
 local files = {
-	Updater = "",
-	
+	Updater = "https://raw.githubusercontent.com/Malakahh/ComputerCraftScripts/master/Updater.lua",
+	BlueprintBot = "https://raw.githubusercontent.com/Malakahh/ComputerCraftScripts/master/BlueprintBot.lua",
 }
 
 local function WriteToFile(name, content)
