@@ -15,7 +15,7 @@ local function WriteToFile(name, content)
 end
 
 local function UpdateFile(file)
-	local url = files(tostring(file))
+	local url = files[tostring(file)]
 	http.request(url)
 
 	local requesting = true
