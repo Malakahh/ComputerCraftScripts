@@ -128,18 +128,6 @@ local function FaceTowards(direction)
 end
 
 local function MoveToCoord(x, y, z)
-	if x ~= nil and pos.x ~= x then
-		if pos.x > x then
-			FaceTowards("West")
-		elseif pos.x < x then
-			FaceTowards("East")
-		end
-
-		while pos.x ~= x do
-			forward()
-		end
-	end
-
 	if z ~= nil and pos.z ~= z then
 		if pos.z > z then
 			FaceTowards("North")
@@ -148,6 +136,18 @@ local function MoveToCoord(x, y, z)
 		end
 
 		while pos.z ~= z do
+			forward()
+		end
+	end
+
+	if x ~= nil and pos.x ~= x then
+		if pos.x > x then
+			FaceTowards("West")
+		elseif pos.x < x then
+			FaceTowards("East")
+		end
+
+		while pos.x ~= x do
 			forward()
 		end
 	end
@@ -266,11 +266,11 @@ local function BuildBlueprint(layers)
 
 					MoveToCoord(0, i, 0)
 					FaceTowards("East")
-					
+
 					i = i + 1
 
 					turtle.digUp()
-					turtle.up()
+					up()
 
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
 
