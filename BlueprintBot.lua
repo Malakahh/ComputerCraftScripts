@@ -264,10 +264,10 @@ local function BuildBlueprint(layers)
 						return
 					end
 
-					i = i + 1
-
 					MoveToCoord(0, i, 0)
 					FaceTowards("East")
+					
+					i = i + 1
 
 					turtle.digUp()
 					turtle.up()
