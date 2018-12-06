@@ -15,7 +15,27 @@ local pos = {
 	["z"] = 0
 }
 
+local function AddMaterial(idx)
+	if idx ~= 0 then
+		local data = turtle.getItemDetail(idx)
+
+		if data == nil then
+			return false
+		end
+
+		if patternMaterials[idx] == nil then
+			patternMaterials[idx] = data.name
+		elseif patternMaterials[idx] ~= data.name then
+			return false
+		end
+	end
+end
+
 local function ValidatePatterns()
+	if blueprint == nil then
+		print("Blueprint missing")
+	end
+
 	local numPatterns = #blueprint
 
 	for patternIdx = 1, numPatterns, 1 do
@@ -26,20 +46,14 @@ local function ValidatePatterns()
 			local maxX = #pattern[z]
 
 			for x = 1, maxX, 1 do
-				local inventoryIdx = pattern[z][x]
+				local inventorySlot = pattern[z][x]
 
-				if inventoryIdx ~= 0 then
-					local data = turtle.getItemDetail(inventoryIdx)
-
-					if data == nil then
-						return false
+				if type(inventorySlot) == "table" then
+					for k,v in pairs(inventorySlot) do
+						AddMaterial(k)
 					end
-
-					if patternMaterials[inventoryIdx] == nil then
-						patternMaterials[inventoryIdx] = data.name
-					elseif patternMaterials[inventoryIdx] ~= data.name then
-						return false
-					end
+				elseif type(inventorySlot) == "number" then
+					AddMaterial(inventorySlot)
 				end
 			end
 		end 
@@ -208,8 +222,33 @@ local function ValidateInventory()
 	return true
 end
 
+local function SolveIndex(idx)
+	if type(idx) == "number" then
+		return idx
+	end
+
+	if type(idx) == "table" then
+		local cumulative = 0
+
+		local rng = math.random(0,1)
+
+		for k,v in pairs(idx) do
+			cumulative = cumulative + v
+			if rng < cumulative then
+				return k
+			end
+		end
+
+		print("Percentages were off")
+		return nil
+	end
+
+	print("Wrong type in SolveIndex")
+	return nil
+end
+
 local function ConstructPattern(pattern)
-	BuildOne(pattern[1][1])
+	BuildOne(SolveIndex(pattern[1][1]))
 
 	local maxZ = #pattern
 	for z = 1, maxZ, 1 do
@@ -231,7 +270,7 @@ local function ConstructPattern(pattern)
 
 		for x = startX, endX, increment do
 
-			local idxToPlace = pattern[z][x]
+			local idxToPlace = SolveIndex(pattern[z][x])
 
 			if not ValidateInventory() then
 				return false
@@ -242,7 +281,7 @@ local function ConstructPattern(pattern)
 
 		if z + 1 <= maxZ then
 			FaceTowards("South")
-			local idxToPlace = pattern[z + 1][endX]
+			local idxToPlace = SolveIndex(pattern[z + 1][endX])
 
 			if not ValidateInventory() then
 				return false
