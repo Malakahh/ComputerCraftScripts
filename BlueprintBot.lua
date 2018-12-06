@@ -230,11 +230,11 @@ local function SolveIndex(idx)
 	if type(idx) == "table" then
 		local cumulative = 0
 
-		local rng = math.random(0,1)
+		local rng = math.random()
 
 		for k,v in pairs(idx) do
 			cumulative = cumulative + v
-			if rng < cumulative then
+			if rng <= cumulative then
 				return k
 			end
 		end
