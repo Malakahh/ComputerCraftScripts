@@ -179,6 +179,8 @@ local function BuildOne(idxToPlace)
 		turtle.digDown()
 	end
 
+	print("Attempting to place index: " .. tostring(idxToPlace))
+
 	if idxToPlace ~= nil and idxToPlace ~= 0 then
 		turtle.select(idxToPlace)
 		turtle.placeDown()
@@ -260,7 +262,7 @@ local function BuildBlueprint(layers)
 		print("Pattern is valid")
 		print("Building " .. layers .. " layers")
 
-		local i = 1
+		local i = 0
 		while true do
 			local patternIdx
 			for patternIdx = 1, #blueprint, 1 do

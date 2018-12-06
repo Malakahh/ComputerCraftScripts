@@ -1,1 +1,1 @@
-local blueprint = {	{["successive"] = 3,["pattern"] = { {1, 1, 1}, {0, 1, 0}, {1, 1, 1},}, }}
+local blueprint = {	{["successive"] = 3,["pattern"] = { {1, 1, 1}, {1, 1, 1}, {1, 1, 1},}, }}
