@@ -202,8 +202,6 @@ local function ValidateInventory()
 end
 
 local function ConstructPattern(pattern)
-	MoveToCoord(0, 0, 0)
-	FaceTowards("East")
 	BuildOne(pattern[1][1])
 
 	local maxZ = #pattern
@@ -259,22 +257,26 @@ local function BuildBlueprint(layers)
 		while true do
 			for patternIdx = 1, #blueprint, 1 do
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
-					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
-
-
-					if not success then
-						print("Failed to construct pattern")
+					if i == layers then
+						MoveToCoord(0,0,0)
 						return
 					end
 
 					i = i + 1
 
-					if i == layers then
-						return
-					end
+					MoveToCoord(0, i, 0)
+					FaceTowards("East")
 
 					turtle.digUp()
 					turtle.up()
+
+					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
+
+					if not success then
+						print("Failed to construct pattern")
+						return
+					end
+					
 				end
 			end
 		end
