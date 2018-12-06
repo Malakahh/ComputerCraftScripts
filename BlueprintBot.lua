@@ -176,11 +176,13 @@ local function BuildOne(idxToPlace)
 		turtle.digDown()
 	end
 
-	print("Attempting to place index: " .. tostring(idxToPlace))
-
-	if idxToPlace ~= nil and idxToPlace ~= 0 then
-		turtle.select(idxToPlace)
-		turtle.placeDown()
+	if idxToPlace ~= nil then
+		if idxToPlace ~= 0 then
+			turtle.select(idxToPlace)
+			turtle.placeDown()
+		end
+	else
+		print("Attempted to place index: " .. tostring(idxToPlace))
 	end
 end
 
@@ -222,10 +224,8 @@ local function ConstructPattern(pattern)
 			FaceTowards("West")
 		end
 
-		print("startX: " .. startX .. " endX: " .. endX .. " increment: " .. increment)
-
 		for x = startX, endX, increment do
-			print("z: " .. z .. " x: " .. x)
+
 			local idxToPlace = pattern[z][x]
 
 			if not ValidateInventory() then
@@ -261,9 +261,9 @@ local function BuildBlueprint(layers)
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
 
-					print("Constructed pattern: " .. tostring(success))
 
 					if not success then
+						print("Failed to construct pattern")
 						return
 					end
 
@@ -273,6 +273,7 @@ local function BuildBlueprint(layers)
 						return
 					end
 
+					turtle.digUp()
 					turtle.up()
 				end
 			end
@@ -282,6 +283,7 @@ local function BuildBlueprint(layers)
 	end
 end
 
+print("Please input number of layers to build:")
 local userInput = io.read()
 BuildBlueprint(tonumber(userInput))
 
