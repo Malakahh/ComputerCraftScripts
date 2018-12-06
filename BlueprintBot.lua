@@ -73,6 +73,7 @@ local function forward()
 end
 
 local function back()
+	doRefuel()
 	turtle.back()
 	if facingDirection == "East" then
 		pos.x = pos.x - 1
@@ -86,16 +87,19 @@ local function back()
 end
 
 local function up()
+	doRefuel()
 	turtle.up()
 	pos.y = pos.y + 1
 end
 
 local function down()
+	doRefuel()
 	turtle.down()
 	pos.y = pos.y - 1
 end
 
 local function turnRight()
+	doRefuel()
 	turtle.turnRight()
 	if facingDirection == "East" then
 		facingDirection = "South"
@@ -109,6 +113,7 @@ local function turnRight()
 end
 
 local function turnLeft()
+	doRefuel()
 	turtle.turnLeft()
 	if facingDirection == "East" then
 		facingDirection = "North"
