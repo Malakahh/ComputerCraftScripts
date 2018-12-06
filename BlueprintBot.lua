@@ -203,6 +203,8 @@ end
 
 local function ConstructPattern(pattern)
 	MoveToCoord(0, 0)
+	FaceTowards("East")
+	BuildOne(pattern[1][1])
 
 	local maxZ = #pattern
 	local z
@@ -210,13 +212,13 @@ local function ConstructPattern(pattern)
 		local startX, endX, increment
 
 		if z % 2 == 1 then
-			startX = 1
+			startX = 2
 			endX = #pattern[z]
 			increment = 1
 
 			FaceTowards("East")
 		else
-			startX = #pattern[z]
+			startX = #pattern[z] - 1
 			endX = 1
 			increment = -1
 
@@ -277,6 +279,8 @@ local function BuildBlueprint(layers)
 					if i == layers then
 						return
 					end
+
+					turtle.up()
 				end
 			end
 		end
