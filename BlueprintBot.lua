@@ -161,6 +161,8 @@ local function MoveToCoord(x, y, z)
 			end			
 		end
 	end
+
+	print("finished moving to (" .. pos.x .. ", " .. pos.y .. ", " .. pos.z .. ")")
 end
 
 local function BuildOne(idxToPlace)
