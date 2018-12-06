@@ -54,7 +54,7 @@ local function doRefuel()
 	if currentLevel <= lowFuelThreshold then
 		print("Refuelling")
 		turtle.select(fuelSlot)
-		turtle.refuel()
+		turtle.refuel(1)
 	end
 end
 
