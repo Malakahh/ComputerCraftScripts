@@ -69,9 +69,9 @@ local function forward()
 	elseif facingDirection == "West" then
 		pos.x = pos.x - 1
 	elseif facingDirection == "South" then
-		pos.y = pos.y + 1
+		pos.z = pos.z + 1
 	elseif facingDirection == "North" then
-		pos.y = pos.y - 1
+		pos.z = pos.z - 1
 	end
 end
 
@@ -82,20 +82,20 @@ local function back()
 	elseif facingDirection == "West" then
 		pos.x = pos.x + 1
 	elseif facingDirection == "South" then
-		pos.y = pos.y - 1
+		pos.z = pos.z - 1
 	elseif facingDirection == "North" then
-		pos.y = pos.y + 1
+		pos.z = pos.z + 1
 	end
 end
 
 local function up()
 	turtle.up()
-	pos.z = pos.z + 1
+	pos.y = pos.y + 1
 end
 
 local function down()
 	turtle.down()
-	pos.z = pos.z - 1
+	pos.y = pos.y - 1
 end
 
 local function turnRight()
@@ -143,23 +143,23 @@ local function MoveToCoord(x, y, z)
 		end
 	end
 
-	if y ~= nil and pos.y ~= y then
-		if pos.y > y then
+	if z ~= nil and pos.z ~= z then
+		if pos.z > z then
 			FaceTowards("North")
-		elseif pos.y < y then
+		elseif pos.z < z then
 			FaceTowards("South")
 		end
 
-		while pos.y ~= y do
+		while pos.z ~= z do
 			forward()
 		end
 	end
 
-	if z ~= nil and pos.z ~= z then
-		while pos.z ~= z do
-			if pos.z > z then
+	if y ~= nil and pos.y ~= y then
+		while pos.y ~= y do
+			if pos.y > y then
 				down()
-			elseif pos.z < z then
+			elseif pos.y < y then
 				up()
 			end			
 		end
@@ -202,7 +202,7 @@ local function ValidateInventory()
 end
 
 local function ConstructPattern(pattern)
-	MoveToCoord(0, 0)
+	MoveToCoord(0, 0, 0)
 	FaceTowards("East")
 	BuildOne(pattern[1][1])
 
@@ -268,7 +268,7 @@ local function BuildBlueprint(layers)
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
 
-					print("Constructed pattern: " .. success)
+					print("Constructed pattern: " .. tostring(success))
 
 					if not success then
 						return
