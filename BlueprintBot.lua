@@ -243,7 +243,7 @@ local function ConstructPattern(pattern)
 
 		if z + 1 <= maxZ then
 			FaceTowards("South")
-
+			print("x: " .. tostring(x))
 			local idxToPlace = pattern[z + 1][x]
 
 			if not ValidateInventory() then
