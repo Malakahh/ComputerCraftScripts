@@ -260,7 +260,7 @@ local function BuildBlueprint(layers)
 		print("Pattern is valid")
 		print("Building " .. layers .. " layers")
 
-		local i
+		local i = 1
 		while true do
 			local patternIdx
 			for patternIdx = 1, #blueprint, 1 do
