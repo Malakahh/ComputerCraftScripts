@@ -18,16 +18,13 @@ local pos = {
 local function ValidatePatterns()
 	local numPatterns = #blueprint
 
-	local patternIdx
 	for patternIdx = 1, numPatterns, 1 do
 		local pattern = blueprint[patternIdx]["pattern"]
 		local maxZ = #pattern
 
-		local z
 		for z = 1, maxZ, 1 do
 			local maxX = #pattern[z]
 
-			local x
 			for x = 1, maxX, 1 do
 				local inventoryIdx = pattern[z][x]
 
@@ -188,7 +185,6 @@ local function BuildOne(idxToPlace)
 end
 
 local function ValidateInventory()
-	local i
 	for i = 1, 16, 1 do
 		local data = turtle.getItemDetail(i)
 		if data ~= nil then
@@ -209,7 +205,6 @@ local function ConstructPattern(pattern)
 	BuildOne(pattern[1][1])
 
 	local maxZ = #pattern
-	local z
 	for z = 1, maxZ, 1 do
 		local startX, endX, increment
 
@@ -229,7 +224,6 @@ local function ConstructPattern(pattern)
 
 		print("startX: " .. startX .. " endX: " .. endX .. " increment: " .. increment)
 
-		local x
 		for x = startX, endX, increment do
 			print("z: " .. z .. " x: " .. x)
 			local idxToPlace = pattern[z][x]
@@ -243,8 +237,7 @@ local function ConstructPattern(pattern)
 
 		if z + 1 <= maxZ then
 			FaceTowards("South")
-			print("x: " .. tostring(x))
-			local idxToPlace = pattern[z + 1][x]
+			local idxToPlace = pattern[z + 1][endX]
 
 			if not ValidateInventory() then
 				return false
@@ -264,9 +257,7 @@ local function BuildBlueprint(layers)
 
 		local i = 0
 		while true do
-			local patternIdx
 			for patternIdx = 1, #blueprint, 1 do
-				local successiveIdx
 				for successiveIdx = 1, blueprint[patternIdx]["successive"], 1 do
 					local success = ConstructPattern(blueprint[patternIdx]["pattern"])
 
